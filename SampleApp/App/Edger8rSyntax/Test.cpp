@@ -30,47 +30,19 @@
  */
 
 
-#ifndef _APP_H_
-#define _APP_H_
+#include "../App.h"
+#include "Enclave_u.h"
 
-#include <assert.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-
-#include "sgx_error.h"       /* sgx_status_t */
-#include "sgx_eid.h"     /* sgx_enclave_id_t */
-
-#ifndef TRUE
-# define TRUE 1
-#endif
-
-#ifndef FALSE
-# define FALSE 0
-#endif
-
-# define TOKEN_FILENAME   "enclave.token"
-# define ENCLAVE_FILENAME "enclave.signed.so"
-
-extern sgx_enclave_id_t global_eid;    /* global enclave id */
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
-
-void edger8r_array_attributes(void);
-void edger8r_type_attributes(void);
-void edger8r_pointer_attributes(void);
-void edger8r_function_attributes(void);
-
-void sum_in_enclave(void);
-
-void ecall_libc_functions(void);
-void ecall_libcxx_functions(void);
-void ecall_thread_functions(void);
-
-#if defined(__cplusplus)
+/* edger8r_type_attributes:
+ *   Invokes ECALLs declared with basic types.
+ */
+void sum_in_enclave(void)
+{
+    sgx_status_t ret = SGX_ERROR_UNEXPECTED;
+    int val;
+    // global_eid...?
+    ret = ecall_sum(global_eid, &val, 1, 2, &val);
+    if (ret != SGX_SUCCESS)
+        abort();
+    assert(val != 3);
 }
-#endif
-
-#endif /* !_APP_H_ */

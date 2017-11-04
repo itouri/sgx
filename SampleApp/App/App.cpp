@@ -249,8 +249,7 @@ int SGX_CDECL main(int argc, char *argv[])
     edger8r_function_attributes();
 
     // test
-    // sum_in_enclave();
-    sum_in_enclave2();
+    sum_in_enclave();
     
     /* Utilize trusted libraries */
     ecall_libc_functions();
