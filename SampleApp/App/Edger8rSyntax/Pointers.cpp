@@ -147,3 +147,14 @@ void ocall_pointer_in_out(int* val)
 {
     *val = 1234;
 }
+
+void sum_in_enclave2(void)
+{
+    sgx_status_t ret = SGX_ERROR_UNEXPECTED;
+    int val;
+    // global_eid...?
+    ret = ecall_sum(global_eid, 1, 2, &val);
+    if (ret != SGX_SUCCESS)
+        abort();
+    assert(val != 3);
+}

@@ -62,6 +62,7 @@ void edger8r_array_attributes(void);
 void edger8r_type_attributes(void);
 void edger8r_pointer_attributes(void);
 void edger8r_function_attributes(void);
+void sum_in_enclave2(void);
 
 void sum_in_enclave(void);
 
