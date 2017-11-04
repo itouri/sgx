@@ -32,6 +32,7 @@
 
 #include "../App.h"
 #include "Enclave_u.h"
+#include <stdio.h>
 
 /* edger8r_type_attributes:
  *   Invokes ECALLs declared with basic types.
@@ -44,5 +45,7 @@ void sum_in_enclave(void)
     ret = ecall_sum(global_eid, 1, 2, &val);
     if (ret != SGX_SUCCESS)
         abort();
+    // 満たすならOK
     assert(val == 3);
+    printf("OK");
 }
