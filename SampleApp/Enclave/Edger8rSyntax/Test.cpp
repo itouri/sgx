@@ -40,6 +40,9 @@
 
 void ecall_sum(int a, int b, int *val)
 {
+    if (sgx_is_within_enclave(val, sizeof(int)) != 1)
+        abort();
+    assert(*val == 0);
     *val = a + b;
 }
 
