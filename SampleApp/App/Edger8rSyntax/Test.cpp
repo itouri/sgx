@@ -44,5 +44,5 @@ void sum_in_enclave(void)
     ret = ecall_sum(global_eid, 1, 2, &val);
     if (ret != SGX_SUCCESS)
         abort();
-    assert(val != 3);
+    assert(val == 3);
 }
