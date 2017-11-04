@@ -47,5 +47,5 @@ void sum_in_enclave(void)
         abort();
     // 満たすならOK
     assert(val == 3);
-    printf("OK");
+    printf("OK! val=%d\n",val);
 }
