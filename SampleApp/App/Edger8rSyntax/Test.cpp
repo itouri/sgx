@@ -41,7 +41,7 @@ void sum_in_enclave(void)
     sgx_status_t ret = SGX_ERROR_UNEXPECTED;
     int val = 0;
     // global_eid...?
-    ret = ecall_sum(global_eid, &val, 1, 2, &val);
+    ret = ecall_sum(global_eid, 1, 2, &val);
     if (ret != SGX_SUCCESS)
         abort();
     assert(val != 3);
