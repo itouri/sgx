@@ -224,7 +224,7 @@ void ocall_print_string(const char *str)
     /* Proxy/Bridge will check the length and null-terminate 
      * the input string to prevent buffer overflow. 
      */
-    printf("%s", str);
+    printf("From envlave:%s", str);
 }
 
 
@@ -247,6 +247,9 @@ int SGX_CDECL main(int argc, char *argv[])
     edger8r_pointer_attributes();
     edger8r_type_attributes();
     edger8r_function_attributes();
+
+    // test
+    sum_in_enclave();
     
     /* Utilize trusted libraries */
     ecall_libc_functions();
