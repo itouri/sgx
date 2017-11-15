@@ -50,3 +50,14 @@ void sum_in_enclave(void)
     printf("Enclaving is OK! val=%d\n",val);
 }
 
+void file_io_main(void)
+{
+    sgx_status_t ret = SGX_ERROR_UNEXPECTED;
+    int val = 0;
+    // global_eid...?
+    ret = ecall_main(global_eid);
+    if (ret != SGX_SUCCESS)
+        abort();
+    // 満たすならOK
+    printf("FileIO is OK!\n");
+}

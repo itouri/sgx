@@ -42,8 +42,8 @@ extern "C" {
 #endif
 
 void printf(const char *fmt, ...);
-size_t open(const char* filename, int mode);
-size_t read(void *ptr, size_t size, size_t nmemb, int fp);
+size_t open(const char* filename, const char* mode);
+size_t read(char *ptr, size_t size, size_t nmemb, int fp);
 size_t write(const void *ptr, size_t size, size_t nmemb, int fp);
 void close(int file);
 

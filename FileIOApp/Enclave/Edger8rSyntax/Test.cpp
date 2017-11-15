@@ -48,12 +48,28 @@ void ecall_sum(int a, int b, int *val)
 
 void ecall_main()
 {
-    // size_t fp_addr;
-    // // fopen
-    // fp_addr = open("./text.txt","r");
-    // if ( fp == NULL ) {
-    //     ocall_print_string("");
-    // }
+    size_t fp_addr;
+    // fopen
+    fp_addr = open("./text.txt","r");
+    if ( fp_addr == NULL ) {
+        printf("can't open the file");
+    }
 
     // fread
+    char buffer[512];
+
+    //FIXME why needed this code?
+    int i;
+    for (i=0; i<512; i++) {
+        buffer[i] = '-';
+    }
+
+    size_t ret;
+    if ( (ret = read(buffer, sizeof(char), 8, fp_addr)) == 0 ) {
+        // read() is failed
+        printf("can't read the file");
+        return;
+    }
+    printf(" size is %d\n", ret);
+    printf(" Readed: %s\n", buffer);
 }
