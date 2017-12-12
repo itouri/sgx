@@ -1,3 +1,4 @@
+# trece the kernel
 sudo lttng create my-kernel-session --output=$HOME/sgx-trace
 sudo enable-event --kernel --all
 sudo lttng start
