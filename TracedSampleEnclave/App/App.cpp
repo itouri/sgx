@@ -42,6 +42,8 @@
 #include "App.h"
 #include "Enclave_u.h"
 
+#include "sgx-tp.h"
+
 /* Global EID shared by multiple threads */
 sgx_enclave_id_t global_eid = 0;
 
@@ -234,24 +236,30 @@ int SGX_CDECL main(int argc, char *argv[])
     (void)(argc);
     (void)(argv);
 
+    int ret;
+
+    
+    ret = initialize_enclave();
 
     /* Initialize the enclave */
-    if(initialize_enclave() < 0){
+    if(ret < 0){
         printf("Enter a character before exit ...\n");
         getchar();
         return -1; 
     }
  
     /* Utilize edger8r attributes */
-    edger8r_array_attributes();
-    edger8r_pointer_attributes();
-    edger8r_type_attributes();
-    edger8r_function_attributes();
+    //edger8r_array_attributes();
+    //edger8r_pointer_attributes();
+    //edger8r_type_attributes();
+    //edger8r_function_attributes();
     
     /* Utilize trusted libraries */
+    tracepoint(sgx_trace, my_first_tracepoint, 0, "Before ecall_libc_function");
     ecall_libc_functions();
-    ecall_libcxx_functions();
-    ecall_thread_functions();
+    tracepoint(sgx_trace, my_first_tracepoint, 1, "After ecall_libc_function");
+    //ecall_libcxx_functions();
+    //ecall_thread_functions();
 
     /* Destroy the enclave */
     sgx_destroy_enclave(global_eid);
