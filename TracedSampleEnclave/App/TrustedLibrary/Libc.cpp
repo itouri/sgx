@@ -33,6 +33,8 @@
 #include "../App.h"
 #include "Enclave_u.h"
 
+#include "../sgx-tp.h"
+
 /* ecall_libc_functions:
  *   Invokes standard C functions.
  */
@@ -40,12 +42,19 @@ void ecall_libc_functions(void)
 {
     sgx_status_t ret = SGX_ERROR_UNEXPECTED;
 
+    tracepoint(sgx_trace, my_first_tracepoint, 0, "Before ecall_malloc_free");
     ret = ecall_malloc_free(global_eid);
+    tracepoint(sgx_trace, my_first_tracepoint, 0, "Finished ecall_malloc_free");
+
     if (ret != SGX_SUCCESS)
         abort();
     
     int cpuid[4] = {0x0, 0x0, 0x0, 0x0};
+
+    tracepoint(sgx_trace, my_first_tracepoint, 0, "Before ecall_libc_function");
     ret = ecall_sgx_cpuid(global_eid, cpuid, 0x0);
+    tracepoint(sgx_trace, my_first_tracepoint, 0, "Finished ecall_libc_function");
+
     if (ret != SGX_SUCCESS)
         abort();
 }
