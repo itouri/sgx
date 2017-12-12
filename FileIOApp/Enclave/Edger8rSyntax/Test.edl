@@ -35,6 +35,7 @@ enclave {
     trusted {
 
         public void ecall_sum(int a, int b,[out] int *val);
+        public void ecall_main();
 
         /* for using user defined types, please refer to Pointers.edl, Arrays.edl. */
     };

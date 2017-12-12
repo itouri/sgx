@@ -69,7 +69,7 @@ size_t open(const char* filename, const char* mode) {
     return ret;
 }
 
-size_t read(void *ptr, size_t size, size_t nmemb, int fp) {
+size_t read(char *ptr, size_t size, size_t nmemb, int fp) {
     size_t ret;
     if (ocall_read(&ret, ptr, size, nmemb, fp) != SGX_SUCCESS) return -1;
     return ret;

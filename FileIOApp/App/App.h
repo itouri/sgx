@@ -64,6 +64,7 @@ void edger8r_pointer_attributes(void);
 void edger8r_function_attributes(void);
 
 void sum_in_enclave(void);
+void file_io_main(void);
 
 void ecall_libc_functions(void);
 void ecall_libcxx_functions(void);

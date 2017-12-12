@@ -58,9 +58,9 @@ enclave {
         
         size_t ocall_open([in, string] const char* filename, [in]const char* mode);
 
-        size_t ocall_read([out, size=size]void *ptr, size_t size, size_t nmemb, size_t fp);
+        size_t ocall_read([in, out, string]char *ptr, size_t size, size_t nmemb, size_t fp);
 
-        size_t ocall_write([in, size=size]const void *ptr, size_t size, size_t nmemb, size_t fp);
+        size_t ocall_write([in, out, size=size]const void *ptr, size_t size, size_t nmemb, size_t fp);
 
         void ocall_close(int fp);
     };

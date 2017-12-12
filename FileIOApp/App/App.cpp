@@ -230,9 +230,16 @@ size_t ocall_open(const char* filename, const char* mode) {
     return (size_t)fopen(filename, mode);
 }
 
-size_t ocall_read(void *ptr, size_t size, size_t nmemb, size_t fp_addr) {
+size_t ocall_read(char *ptr, size_t size, size_t nmemb, size_t fp_addr) {
     FILE *fp = (FILE*)fp_addr;
-    return fread(ptr, size, nmemb, fp);
+    size_t ret;
+    if ( (ret = fread(ptr, size, nmemb, fp)) == 0) {
+        printf("ocall_read: Can't read file\n");
+    }
+    printf("Read is OK : %d\n", ret);
+    ptr[ret-1] = '\0';
+    printf("Readed data: %s\n", ptr);
+    return ret;
 }
 
 size_t ocall_write(const void *ptr, size_t size, size_t nmemb, size_t fp_addr) {
@@ -259,7 +266,9 @@ int SGX_CDECL main(int argc, char *argv[])
     }
 
     // test
-    sum_in_enclave();
+    // sum_in_enclave();
+
+    file_io_main();
 
     /* Destroy the enclave */
     sgx_destroy_enclave(global_eid);
