@@ -1,6 +1,8 @@
 #!/bin/bash
 
-git clone https://github.com/01org/linux-sgx-driver.git
+set -eu
+
+# git clone https://github.com/01org/linux-sgx-driver.git
 cd linux-sgx-driver/
 make -j8
 
