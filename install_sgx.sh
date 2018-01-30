@@ -43,7 +43,7 @@ shopt -s expand_aliases # TODO understand this
 source ./linux-sgx/sgxsdk/environment # ここでsourceが未反映
 
 # Install the Intel(R) SGX PSW: Prerequisites
-if [ ! -e iclsClient-1.45.449.12-1.x86_64.rpm ]; then 
+if [ ! -e ./linux-sgx/iclsClient-1.45.449.12-1.x86_64.rpm ]; then 
 wget "https://drive.google.com/uc?export=download&id=1LuEaM1iFpQJ-Y8jn54y2gdcT4vuBtW9O" -O iclsClient-1.45.449.12-1.x86_64.rpm
 fi
 
@@ -61,7 +61,7 @@ cmake .;make;sudo make install;sudo ldconfig;sudo systemctl enable jhi
 cd ../ # ./linux-sgx/
 
 # Install the Intel(R) SGX PSW
-./linux/installer/bin/sgx_linux_x64_psw_2.1.42002.bin # TODO get version
+sudo ./linux/installer/bin/sgx_linux_x64_psw_2.1.42002.bin # TODO get version
 sudo service aesmd start
 
 echo "Complete!!"
