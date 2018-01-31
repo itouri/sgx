@@ -24,7 +24,7 @@ make psw_install_pkg # TODO 冪等性 2回目以降もmakeする
 
 ./linux/installer/bin/sgx_linux_x64_sdk_2.1.42002.bin # TODO get version
 shopt -s expand_aliases # TODO understand this
-source ./linux-sgx/sgxsdk/environment # ここでsourceが未反映
+source ./sgxsdk/environment # ここでsourceが未反映
 
 # Install the Intel(R) SGX PSW: Prerequisites
 if [ ! -e ./linux-sgx/iclsClient-1.45.449.12-1.x86_64.rpm ]; then 
