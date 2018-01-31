@@ -241,13 +241,7 @@ int SGX_CDECL main(int argc, char *argv[])
         getchar();
         return -1; 
     }
- 
-    /* Utilize edger8r attributes */
-    edger8r_array_attributes();
-    edger8r_pointer_attributes();
-    edger8r_type_attributes();
-    edger8r_function_attributes();
-
+    
     // test
     sum_in_enclave();
     
