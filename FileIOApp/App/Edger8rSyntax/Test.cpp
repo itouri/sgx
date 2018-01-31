@@ -37,19 +37,6 @@
 /* edger8r_type_attributes:
  *   Invokes ECALLs declared with basic types.
  */
-void sum_in_enclave(void)
-{
-    sgx_status_t ret = SGX_ERROR_UNEXPECTED;
-    int val = 0;
-    // global_eid...?
-    ret = ecall_sum(global_eid, 1, 2, &val);
-    if (ret != SGX_SUCCESS)
-        abort();
-    // 満たすならOK
-    assert(val == 3);
-    printf("Enclaving is OK! val=%d\n",val);
-}
-
 void file_io_main(void)
 {
     sgx_status_t ret = SGX_ERROR_UNEXPECTED;
