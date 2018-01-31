@@ -62,6 +62,6 @@ void ecall_main()
         printf("can't read the file");
         return;
     }
-    printf(" size is %d\n", ret);
-    printf(" Readed: %s\n", buffer);
+    printf("size is %d\n", ret);
+    printf("Readed: %s\n", buffer);
 }
