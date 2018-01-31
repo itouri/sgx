@@ -241,15 +241,10 @@ int SGX_CDECL main(int argc, char *argv[])
         getchar();
         return -1; 
     }
-    
+
     // test
     sum_in_enclave();
     
-    /* Utilize trusted libraries */
-    ecall_libc_functions();
-    ecall_libcxx_functions();
-    ecall_thread_functions();
-
     /* Destroy the enclave */
     sgx_destroy_enclave(global_eid);
     
