@@ -33,18 +33,29 @@
 #include "../App.h"
 #include "Enclave_u.h"
 #include <stdio.h>
+#include <sys/time.h>
+
+double gettimeofday_sec() {
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  return tv.tv_sec + tv.tv_usec * 1e-6;
+}
 
 /* edger8r_type_attributes:
  *   Invokes ECALLs declared with basic types.
  */
 void file_io_main(void)
 {
+    double t1, t2;
     sgx_status_t ret = SGX_ERROR_UNEXPECTED;
-    int val = 0;
     // global_eid...?
+    t1 = gettimeofday_sec();
     ret = ecall_main(global_eid);
-    if (ret != SGX_SUCCESS)
+    if (ret != SGX_SUCCESS) {
         abort();
+    }
+    t2 = gettimeofday_sec();
+    printf("Time: %lf\n", t2-t1);
     // 満たすならOK
     printf("FileIO is OK!\n");
 }

@@ -236,9 +236,9 @@ size_t ocall_read(char *ptr, size_t size, size_t nmemb, size_t fp_addr) {
     if ( (ret = fread(ptr, size, nmemb, fp)) == 0) {
         printf("ocall_read: Can't read file\n");
     }
-    printf("Read is OK : %d\n", ret);
+    //printf("Read is OK : %d\n", ret);
     ptr[ret-1] = '\0';
-    printf("Readed data: %s\n", ptr);
+    //printf("Readed data: %s\n", ptr);
     return ret;
 }
 
@@ -264,9 +264,6 @@ int SGX_CDECL main(int argc, char *argv[])
         getchar();
         return -1; 
     }
-
-    // test
-    // sum_in_enclave();
 
     file_io_main();
 

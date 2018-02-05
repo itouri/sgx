@@ -11,16 +11,16 @@ double gettimeofday_sec() {
 int main () {
   FILE *fp;
   size_t ret;
-  char buffer[512];
+  char buffer[1024];
   double t1, t2;
   
-  fp = fopen("./FileIOMeasuredApp/text.txt", "r");
+  t1 = gettimeofday_sec();
+  fp = fopen("./text.txt", "r");
   if ( fp == NULL ) {
     printf("can't open the file\n");
   }
 
-  t1 = gettimeofday_sec();
-  ret = fread(buffer, sizeof(char), 8, fp);
+  ret = fread(buffer, sizeof(char), 1024, fp);
   if ( ret == 0 ) {
     printf("can't read the file\n");
     return 0;

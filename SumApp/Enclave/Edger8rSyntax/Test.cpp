@@ -45,4 +45,3 @@ void ecall_sum(int a, int b, int *val)
     assert(*val == 0);
     *val = a + b;
 }
-

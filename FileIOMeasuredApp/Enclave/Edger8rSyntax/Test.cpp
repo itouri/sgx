@@ -48,20 +48,20 @@ void ecall_main()
     }
 
     // fread
-    char buffer[512];
+    char buffer[1024];
 
-    //FIXME why needed this code?
+    // FIXME why needed this code?
     int i;
-    for (i=0; i<512; i++) {
+    for (i=0; i<1024; i++) {
         buffer[i] = '-';
     }
 
     size_t ret;
-    if ( (ret = read(buffer, sizeof(char), 8, fp_addr)) == 0 ) {
+    if ( (ret = read(buffer, sizeof(char), 1024, fp_addr)) == 0 ) {
         // read() is failed
         printf("can't read the file");
         return;
     }
-    printf(" size is %d\n", ret);
-    printf(" Readed: %s\n", buffer);
+    //printf("size is %d\n", ret);
+    //printf("Readed: %s\n", buffer);
 }
