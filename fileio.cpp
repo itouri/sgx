@@ -9,24 +9,27 @@ double gettimeofday_sec() {
 }
 
 int main () {
-  FILE *fp;
+  size_t fp;
   size_t ret;
   char buffer[1024];
-  double t1, t2;
+  double t1, t2, t3;
   
   t1 = gettimeofday_sec();
-  fp = fopen("./text.txt", "r");
-  if ( fp == NULL ) {
-    printf("can't open the file\n");
-  }
-
-  ret = fread(buffer, sizeof(char), 1024, fp);
-  if ( ret == 0 ) {
-    printf("can't read the file\n");
-    return 0;
-  }
+  fp = (size_t)fopen("./text.txt", "r");
+  // if ( fp == NULL ) {
+  //   printf("can't open the file\n");
+  // }
   t2 = gettimeofday_sec();
-  printf("Time: %lf\n", t2-t1);
+
+  ret = fread(buffer, sizeof(char), 1024, (FILE*)fp);
+  // if ( ret == 0 ) {
+  //   printf("can't read the file\n");
+  //   return 0;
+  // }
+  t3 = gettimeofday_sec();
+  printf("fopen() Time: %lf\n", t2-t1);
+  printf("fread() Time: %lf\n", t3-t2);
+  printf("Total Time  : %lf\n", t3-t1);
   
   printf("size is %lu\n", ret);
   printf("Readed: %s\n", buffer);

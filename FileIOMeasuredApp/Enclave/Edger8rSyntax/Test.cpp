@@ -57,7 +57,8 @@ void ecall_main()
     }
 
     size_t ret;
-    if ( (ret = read(buffer, sizeof(char), 1024, fp_addr)) == 0 ) {
+    ret = read(buffer, sizeof(char), 1024, fp_addr);
+    if ( ret == 0 ){
         // read() is failed
         printf("can't read the file");
         return;

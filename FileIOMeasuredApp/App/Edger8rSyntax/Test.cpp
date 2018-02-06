@@ -33,13 +33,6 @@
 #include "../App.h"
 #include "Enclave_u.h"
 #include <stdio.h>
-#include <sys/time.h>
-
-double gettimeofday_sec() {
-  struct timeval tv;
-  gettimeofday(&tv, NULL);
-  return tv.tv_sec + tv.tv_usec * 1e-6;
-}
 
 /* edger8r_type_attributes:
  *   Invokes ECALLs declared with basic types.

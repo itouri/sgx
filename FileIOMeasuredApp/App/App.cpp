@@ -41,6 +41,14 @@
 #include "App.h"
 #include "Enclave_u.h"
 
+#include <sys/time.h>
+
+double gettimeofday_sec() {
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  return tv.tv_sec + tv.tv_usec * 1e-6;
+}
+
 /* Global EID shared by multiple threads */
 sgx_enclave_id_t global_eid = 0;
 
@@ -227,10 +235,18 @@ void ocall_print_string(const char *str)
 }
 
 size_t ocall_open(const char* filename, const char* mode) {
-    return (size_t)fopen(filename, mode);
+    double t1, t2;
+    size_t fp;
+    t1 = gettimeofday_sec();
+    fp = (size_t)fopen(filename, mode);
+    t2 = gettimeofday_sec();
+    printf("fopen: %lf\n", t2-t1);
+    return fp;
 }
 
 size_t ocall_read(char *ptr, size_t size, size_t nmemb, size_t fp_addr) {
+    double t1, t2;
+    t1 = gettimeofday_sec();
     FILE *fp = (FILE*)fp_addr;
     size_t ret;
     if ( (ret = fread(ptr, size, nmemb, fp)) == 0) {
@@ -238,7 +254,8 @@ size_t ocall_read(char *ptr, size_t size, size_t nmemb, size_t fp_addr) {
     }
     //printf("Read is OK : %d\n", ret);
     ptr[ret-1] = '\0';
-    //printf("Readed data: %s\n", ptr);
+    t2 = gettimeofday_sec();
+    printf("fread: %lf\n", t2-t1);
     return ret;
 }
 

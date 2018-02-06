@@ -63,7 +63,6 @@ endif
 endif
 
 ifeq ($(SGX_DEBUG), 1)
-		# defaultではこっちだから最適化はしていない? O0は最適化なし
         SGX_COMMON_CFLAGS += -O0 -g
 else
         SGX_COMMON_CFLAGS += -O2
@@ -184,7 +183,6 @@ all: .config_$(Build_Mode)_$(SGX_ARCH) $(App_Name) $(Enclave_Name)
 else
 all: .config_$(Build_Mode)_$(SGX_ARCH) $(App_Name) $(Signed_Enclave_Name)
 ifeq ($(Build_Mode), HW_DEBUG)
-	# default だとコレ
 	@echo "The project has been built in debug hardware mode."
 else ifeq ($(Build_Mode), SIM_DEBUG)
 	@echo "The project has been built in debug simulation mode."
