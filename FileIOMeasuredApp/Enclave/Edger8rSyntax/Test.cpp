@@ -44,7 +44,7 @@ void ecall_main()
     // fopen
     fp_addr = open("./text.txt","r");
     if ( fp_addr == NULL ) {
-        printf("can't open the file");
+        printf("can't open the file\n");
     }
 
     // fread
@@ -60,7 +60,7 @@ void ecall_main()
     ret = read(buffer, sizeof(char), 1024, fp_addr);
     if ( ret == 0 ){
         // read() is failed
-        printf("can't read the file");
+        printf("can't read the file\n");
         return;
     }
     //printf("size is %d\n", ret);

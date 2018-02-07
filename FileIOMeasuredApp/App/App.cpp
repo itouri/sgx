@@ -37,6 +37,9 @@
 # include <pwd.h>
 # define MAX_PATH FILENAME_MAX
 
+#include<fcntl.h>
+#include<unistd.h>
+
 #include "sgx_urts.h"
 #include "App.h"
 #include "Enclave_u.h"
@@ -234,28 +237,30 @@ void ocall_print_string(const char *str)
     printf("From envlave:%s", str);
 }
 
+// size_t ocall_open(const char* filename, const char* mode) {
 size_t ocall_open(const char* filename, const char* mode) {
     double t1, t2;
     size_t fp;
-    t1 = gettimeofday_sec();
-    fp = (size_t)fopen(filename, mode);
-    t2 = gettimeofday_sec();
-    printf("fopen: %lf\n", t2-t1);
+    //t1 = gettimeofday_sec();
+    // fp = (size_t)fopen(filename, mode);
+    fp = (size_t)open(filename, O_RDONLY);
+    //t2 = gettimeofday_sec();
+    //printf("fopen: %lf\n", t2-t1);
     return fp;
 }
 
 size_t ocall_read(char *ptr, size_t size, size_t nmemb, size_t fp_addr) {
     double t1, t2;
-    t1 = gettimeofday_sec();
-    FILE *fp = (FILE*)fp_addr;
+    //t1 = gettimeofday_sec();
     size_t ret;
-    if ( (ret = fread(ptr, size, nmemb, fp)) == 0) {
+    // if ( (ret = fread(ptr, size, nmemb, fp)) == 0) {
+    if ( (ret = read(fp_addr, ptr, 1024)) == 0 ) {
         printf("ocall_read: Can't read file\n");
     }
     //printf("Read is OK : %d\n", ret);
     ptr[ret-1] = '\0';
-    t2 = gettimeofday_sec();
-    printf("fread: %lf\n", t2-t1);
+    //t2 = gettimeofday_sec();
+    //printf("fread: %lf\n", t2-t1);
     return ret;
 }
 
@@ -273,7 +278,6 @@ int SGX_CDECL main(int argc, char *argv[])
 {
     (void)(argc);
     (void)(argv);
-
 
     /* Initialize the enclave */
     if(initialize_enclave() < 0){
